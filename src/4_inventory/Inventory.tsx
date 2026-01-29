@@ -14,8 +14,6 @@ type SortDirection = "asc" | "desc";
 type SortState = {key: string | null; direction:SortDirection;}
 type ColumnDef = { key:string; label:string; }
 
-
-
 const Inventory = () => {
   const [show, setShow] = useState(false);
 
