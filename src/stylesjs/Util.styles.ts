@@ -7,6 +7,7 @@ display:flex;
 export const JustifyContent = styled.div`
 width:100%;
 display:flex; justify-content:space-between;
+align-items:center;
 `;
 
 export const W49 = styled.div`
@@ -25,4 +26,3 @@ width:30% !important;
 export const W70 = styled.div`
 width:70% !important;
 `;
-

@@ -28,7 +28,7 @@ import {
   Label,
   MidLabel,
 } from "../stylesjs/Input.styles";
-import { WhiteBtn, MainSubmitBtn, BtnGroup } from "../stylesjs/Button.styles";
+import { WhiteBtn, MainSubmitBtn, BtnRight } from "../stylesjs/Button.styles";
 
 type ColumnDef = {
     key: string; label:string;
@@ -205,7 +205,7 @@ fetchCustomers(); handleClose();
                             </tbody>
                         </Table>
 
-                        <BtnGroup>
+                        <BtnRight>
                             <MainSubmitBtn onClick={() => {
                             setSelectedId(null);
                             setCustomer({
@@ -221,7 +221,7 @@ fetchCustomers(); handleClose();
                             setShow(true);}}>
                                 신규(F2)
                             </MainSubmitBtn>
-                        </BtnGroup>
+                        </BtnRight>
                     </Right>
                 </Flex>
                 </Col>
