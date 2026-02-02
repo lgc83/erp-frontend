@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# ERP Frontend Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+기업 내부 업무 프로세스를 웹 기반으로 관리하기 위한 **ERP(Enterprise Resource Planning) 프론트엔드 웹 애플리케이션**입니다.
 
-Currently, two official plugins are available:
+백엔드 API 구조를 고려하여 **인증 흐름, 권한 제어, 화면 단위 역할 분리**를 중심으로 설계했습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+------------------------------------------------------------------------------------------------------------------------
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### Frontend
+- React 18
+- TypeScript
+- Vite
 
-## Expanding the ESLint configuration
+### UI / Styling
+- Styled-components
+- SCSS
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Auth / Integration
+- JWT 기반 인증 연동
+- 권한(Role) 기반 라우팅 처리
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Development
+- ESLint
+- Prettier
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+------------------------------------------------------------------------------------------------------------------------
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Key Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- 로그인 및 회원 관리 화면 구현
+- ERP 대시보드 UI 구성
+- 재고 관리 화면 및 CRUD UI 설계
+- JWT 인증 상태 기반 접근 제어
+- 사용자 권한(Role)에 따른 화면 접근 제한 및 라우팅 처리
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+------------------------------------------------------------------------------------------------------------------------
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Problem Solving
+
+- **인증 상태 기반 화면 접근 제어 구조 설계**  
+  로그인 여부와 사용자 권한에 따라 접근 가능한 화면이 달라지도록  
+  인증 상태와 Role 정보를 기준으로 라우팅 구조를 분리했습니다.
+
+- **백엔드 인증 흐름을 고려한 프론트엔드 연동**  
+  JWT 기반 인증 구조에 맞춰 로그인, 토큰 만료, 권한 오류 상황을 고려한  
+  화면 전환 및 접근 제어 흐름을 설계했습니다.
+
+- **ERP 화면 특성을 고려한 컴포넌트 분리**  
+  대시보드·관리·목록 화면이 복잡해지는 문제를 해결하기 위해  
+  화면 단위 컴포넌트 분리로 가독성과 유지보수성을 확보했습니다.
+
+------------------------------------------------------------------------------------------------------------------------
+
+## Portfolio Highlights
+
+- 백엔드 인증/인가 구조를 고려한 프론트엔드 설계 경험
+- 화면 단위 컴포넌트 분리 및 재사용성 확보
+- TypeScript 기반 타입 안정성 및 명확한 데이터 흐름 관리
+- 실제 ERP 시스템을 참고한 화면 레이아웃 및 UX 구성
+
+------------------------------------------------------------------------------------------------------------------------
+
+## Preview
+
+- 로그인 / 대시보드 / 관리 화면 UI 미리보기  
+- (스크린샷 또는 GIF 추가 예정)
+
+------------------------------------------------------------------------------------------------------------------------
+
+## Developer
+
+이기창  
+ERP / MES 기반 웹 서비스 프론트엔드 개발  
+React(TypeScript) · Spring Boot 기반 풀스택 프로젝트 진행
