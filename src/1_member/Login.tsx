@@ -106,12 +106,12 @@ const Login = () => {
 
                         <div className="mb-2">
                           <a href="#" className="btn btn-google btn-user btn-block">
-                            <i className="fab fa-google fa-fw"></i> Login with Google
+                            <i className="fab fa- fa-fw"></i> Login with Company Account
                           </a>
                         </div>
-                        <a href="#" className="btn btn-facebook btn-user btn-block">
-                          <i className="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                        </a>
+                        <a href="#" className="btn btn-google btn-user btn-block">
+                                                              Login with Microsoft
+                          </a>
                       </form>
 
                       <hr />

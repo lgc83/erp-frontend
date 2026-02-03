@@ -108,7 +108,7 @@ const Member = () => {
             <div className="col-lg-7">
               <div className="p-5">
                 <div className="text-center">
-                  <h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
+                  <h1 className="h4 text-gray-900 mb-4">ERP 사용자 등록</h1>
                 </div>
                 <Form className="user" onSubmit={handleSubmit}>
                   <div className="form-group row mb-2">
@@ -262,10 +262,13 @@ const Member = () => {
                     variant="primary"
                     className="btn-user btn-block mb-2"
                   >
-                    Register Account
+                    ERP 계정 생성
                   </Button>
-                </Form>
-                <hr />
+                  <div className="text-center text-muted small mb-3">
+                  본 시스템은 관리자 승인 후 사용 가능합니다.
+                  </div>
+                  </Form>
+                  <hr />
 
 <a href= "/" 
 className="btn btn-google btn-user btn-block mb-2"
@@ -273,7 +276,7 @@ onClick={handleInstargramLogin}
 >
     <i className="">
     
-    </i>Register with Insta
+    </i>관리자 승인 요청
 </a>
 
 <a href= "/" 
@@ -282,17 +285,17 @@ onClick={handleInstargramLogin}
 >
       <i className="">
     
-    </i>Register with Kakao
+    </i>회사 이메일로 가입
 </a>
 
                 <div className="text-center mb-2">
                   <a href="/forgot" className="small">
-                    Forgot password?
+                  비밀번호 찾기
                   </a>
                 </div>
                 <div className="text-center">
                   <a href="/login" className="small">
-                    Already have an account? Login!
+                  이미 계정이 있으신가요? 로그인
                   </a>
                 </div>
               </div>
