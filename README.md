@@ -57,7 +57,7 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 화면으로
 
 <br/>
 
-<img src="./screenshots/거래처등록.png" style="max-width:100%; height:auto;" />
+<img src="./거래처등록.png" width="100%" />
 
 </details>
 
