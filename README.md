@@ -65,12 +65,13 @@
 
 ### 판매 등록
 
-<img width="831" height="749" alt="sales" src="https://github.com/user-attachments/assets/판매등록.png" />
+<p align="center">
+  <img src="https://github.com/xxx/판매등록.png" alt="판매 등록 화면" width="100%" />
+</p>
 
 - 거래처 선택 후 판매 품목 다중 라인 입력
 - 수량 × 단가 기반 금액 자동 계산
 - 판매 합계 금액 실시간 반영
-- 실무 ERP 판매 등록 화면 흐름을 그대로 구현
 
 ---
 
