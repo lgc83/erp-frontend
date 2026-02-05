@@ -14,7 +14,7 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 화면입니
 인증 상태 및 사용자 권한(Role)에 따라 접근 가능한 화면이 분기됩니다.
 
 ### 로그인 화면
-<img src="public/img/로그인.png" width="100%" />
+<img src="https://raw.githubusercontent.com/lgc83/erp-frontend/main/public/img/login.png" width="100%" />
 
 ### 회원가입 화면
 <img src="public/img/회원가입.png" width="100%" />
