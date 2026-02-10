@@ -1,27 +1,32 @@
 # ERP Frontend Web Application
 
-본 프로젝트는 ERP 시스템의 **프론트엔드 아키텍처 및 UI/UX 설계 역량**에 초점을 둔 프로젝트입니다.  
-백엔드 API는 실제 ERP/MES 환경을 가정하여 설계된 REST API 구조를 기준으로 연동을 고려하였으며,  
+본 프로젝트는 ERP 시스템의 **프론트엔드 아키텍처 및 UI/UX 설계 역량**에 초점을 둔 포트폴리오 프로젝트입니다.  
+실제 ERP/MES 환경을 가정한 백엔드 REST API 구조를 기준으로 화면 연계를 고려하였으며,  
 프론트엔드에서는 **인증·권한·업무 흐름 중심의 화면 설계와 상태 관리**에 집중하였습니다.
 
-> 본 저장소는 ERP 프론트엔드 포트폴리오 용도로 제작되었습니다.
-
+> 본 저장소는 **ERP 프론트엔드 포트폴리오 용도**로 제작되었습니다.
 
 ---
 
-## 🔐 ERP Login / Sign Up
+## 🔐 Authentication (Login & User Registration)
 
-JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 화면입니다.  
-인증 상태 및 사용자 권한(Role)에 따라 접근 가능한 화면이 분기됩니다.
+JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용자 등록 화면입니다.  
+사용자 인증 상태 및 권한(Role)에 따라 접근 가능한 화면이 분기되도록 설계되었습니다.
 
 ### Login
-<img src="./public/img/login.png" width="100%" />
+<img src="./public/img/로그인.png" width="100%" />
 
-- 인증 정보는 LocalStorage 기반으로 관리하되,
-  인증 만료 및 권한 오류 발생 시 강제 로그아웃 처리 흐름을 고려하여 설계
+- JWT 기반 인증 흐름을 고려한 로그인 UI
+- 인증 정보는 LocalStorage 기반으로 관리
+- 인증 만료 및 권한 오류 발생 시 강제 로그아웃 처리 흐름 고려
 
-### Sign Up
-<img src="./public/img/signup.png" width="100%" />
+### User Registration (회원가입)
+<img src="./public/img/회원가입.png" width="100%" />
+
+- ERP 사용자 등록을 위한 회원가입 화면
+- 회사명, 직급, 연락처 등 **업무 시스템 필수 정보 입력 구조**
+- **관리자 승인 후 계정 활성화** 방식 적용
+- B2B ERP 환경에 적합한 사용자 관리 프로세스 반영
 
 ---
 
@@ -44,75 +49,69 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 화면입니
 
 ## 📁 Master Data Management (기준정보 관리)
 
-### 🔗 Customer Registration (거래처 등록)
+### 📦 Inventory Registration (재고 등록)
+<img src="./public/img/재고등록.png" width="100%" />
 
-영업·구매·회계 전반에서 공통으로 참조되는  
-거래처 마스터 데이터를 등록·관리하는 기준정보 화면입니다.
-
-<img src="./public/img/customer-register.png" width="100%" />
-
-**주요 기능**
-- 거래처 마스터 데이터 등록 및 관리
-- 매출처 / 매입처 구분 관리
-- 실무 ERP 거래처 관리 화면 흐름을 기준으로 UI 설계
-
----
-
-### 📦 Item Registration (품목 등록)
-
-제조·유통 ERP 품목 구조를 참고하여  
-실제 실무에서 사용되는 품목 기준정보를 관리하는 화면입니다.
-
-<img src="./public/img/item-register.png" width="100%" />
-
-**주요 기능**
-- 원재료 / 부재료 / 제품 / 반제품 / 상품 유형별 관리
-- 규격, 단위, 생산공정, 단가(VAT 포함 여부) 설정
-- 세트 품목 여부 및 사용 / 미사용 상태 관리
+- 품목 코드 및 품목명 기반 재고 관리
+- 수량 × 단가 기반 재고 금액 자동 계산
+- ERP 재고 관리 기본 흐름을 고려한 화면 설계
 
 ---
 
 ## 🔄 Transaction Management (거래 관리)
 
+### 🧾 Estimate Registration (견적서 입력)
+<img src="./public/img/견적서입력.png" width="100%" />
+
+- 거래처 기준 견적 데이터 등록
+- 다중 품목 입력 및 합계 금액 자동 계산
+- 실무 ERP 견적서 작성 흐름 반영
+
+### 🧾 Estimate Management (견적서 등록)
+<img src="./public/img/견적서등록2.png" width="100%" />
+
+- 기존 견적 데이터 수정 및 관리
+- 품목 단위 금액 변경 시 합계 자동 반영
+- ERP 견적 관리 화면 구조를 기준으로 UI 설계
+
+---
+
 ### 🧾 Sales Registration (판매 등록)
+<img src="./public/img/판매등록.png" width="100%" />
 
-거래처 선택 후 다수 품목을 입력하여  
-판매 데이터를 등록하는 실무형 판매 관리 화면입니다.
-
-<img src="./public/img/sales-register.png" width="100%" />
-
-**주요 기능**
 - 거래처 선택 후 판매 품목 다중 라인 입력
 - 수량 × 단가 기반 금액 자동 계산
 - 판매 합계 금액 실시간 반영
 
 ---
 
-### 📑 Sales Voucher Registration (매출전표 등록)
+### 📑 Accounting Voucher (회계 전표 관리)
 
-판매 데이터를 기반으로 회계 매출전표를 자동 생성하는 화면입니다.
+#### 일반전표 등록
+<img src="./public/img/일반전표등록.png" width="100%" />
 
-<img src="./public/img/sales-voucher-register.png" width="100%" />
+- 차변 / 대변 구조 기반 전표 입력
+- 전표 상태(작성중 / 확정) 관리
+- ERP 회계 전표 흐름을 고려한 화면 구성
 
-- 금액 계산 로직은 프론트 단에서 선계산하여 사용자 입력 오류를 사전에 방지
-- 서버 전송 전 데이터 정합성 검증 흐름 고려
+#### 매출전표 등록
+<img src="./public/img/매출전표등록.png" width="100%" />
 
-**주요 기능**
+- 매출 발생 시 자동 분개 구조 설계
 - 공급가액 / 부가세 / 합계 자동 계산
-- 매출계정 / 입금계정 분리 관리
-- 차변·대변 자동 분개 미리보기 제공
-- 회계 흐름을 고려한 전표 구조 설계
+- 차변·대변 분개 미리보기 제공
+- 회계 흐름을 고려한 매출 인식 구조 반영
 
 ---
 
 ## 🚀 Key Features
 
 - 로그인 / 회원가입 UI 구현
-- ERP 기준정보 및 거래 관리 화면 구성
+- ERP 기준정보 / 거래 / 회계 관리 화면 구성
 - CRUD 기반 관리 화면 설계
 - JWT 인증 상태 기반 접근 제어
 - 사용자 권한(Role)에 따른 화면 분기
-- 화면 단에서 입력 오류를 최소화하기 위한 UX 중심 설계
+- 입력 오류를 최소화하기 위한 UX 중심 설계
 
 ---
 
