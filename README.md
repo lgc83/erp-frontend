@@ -14,14 +14,14 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 사용자 인증 상태 및 권한(Role)에 따라 접근 가능한 화면이 분기되도록 설계되었습니다.
 
 ### Login
-<img src="./public/img/로그인.png" width="100%" />
+<img src="./public/img/로그인.png" />
 
 - JWT 기반 인증 흐름을 고려한 로그인 UI
 - 인증 정보는 LocalStorage 기반으로 관리
 - 인증 만료 및 권한 오류 발생 시 강제 로그아웃 처리 흐름 고려
 
 ### User Registration (회원가입)
-<img src="./public/img/회원가입.png" width="100%" />
+<img src="./public/img/회원가입.png" />
 
 - ERP 사용자 등록을 위한 회원가입 화면
 - 회사명, 직급, 연락처 등 **업무 시스템 필수 정보 입력 구조**
@@ -50,7 +50,7 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 ## 📁 Master Data Management (기준정보 관리)
 
 ### 📦 Inventory Registration (재고 등록)
-<img src="./public/img/재고등록.png" width="100%" />
+<img src="./public/img/재고등록.png" />
 
 - 품목 코드 및 품목명 기반 재고 관리
 - 수량 × 단가 기반 재고 금액 자동 계산
@@ -61,14 +61,14 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 ## 🔄 Transaction Management (거래 관리)
 
 ### 🧾 Estimate Registration (견적서 입력)
-<img src="./public/img/견적서입력.png" width="100%" />
+<img src="./public/img/견적서입력.png" />
 
 - 거래처 기준 견적 데이터 등록
 - 다중 품목 입력 및 합계 금액 자동 계산
 - 실무 ERP 견적서 작성 흐름 반영
 
 ### 🧾 Estimate Management (견적서 등록)
-<img src="./public/img/견적서등록2.png" width="100%" />
+<img src="./public/img/견적서등록2.png" />
 
 - 기존 견적 데이터 수정 및 관리
 - 품목 단위 금액 변경 시 합계 자동 반영
@@ -77,7 +77,7 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 ---
 
 ### 🧾 Sales Registration (판매 등록)
-<img src="./public/img/판매등록.png" width="100%" />
+<img src="./public/img/판매등록.png" />
 
 - 거래처 선택 후 판매 품목 다중 라인 입력
 - 수량 × 단가 기반 금액 자동 계산
@@ -88,14 +88,14 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 ### 📑 Accounting Voucher (회계 전표 관리)
 
 #### 일반전표 등록
-<img src="./public/img/일반전표등록.png" width="100%" />
+<img src="./public/img/일반전표등록.png" />
 
 - 차변 / 대변 구조 기반 전표 입력
 - 전표 상태(작성중 / 확정) 관리
 - ERP 회계 전표 흐름을 고려한 화면 구성
 
 #### 매출전표 등록
-<img src="./public/img/매출전표등록.png" width="100%" />
+<img src="./public/img/매출전표등록.png" />
 
 - 매출 발생 시 자동 분개 구조 설계
 - 공급가액 / 부가세 / 합계 자동 계산
@@ -107,27 +107,39 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 ## 🗄 Database Snapshot (Estimate Structure)
 
 견적서 입력 화면은  
-실제 ERP 시스템의 **헤더–라인(1:N) 구조**를 기준으로 설계되었으며,  
-프론트엔드 화면에서 입력된 데이터가 DB에 어떻게 저장되는지를 함께 고려하여 구현하였습니다.
+실제 ERP 시스템의 **Header–Line(1:N) 구조**를 기준으로 설계되었으며,  
+프론트엔드 입력 UI와 DB 저장 구조 간의 **명확한 매핑**을 고려하여 구현하였습니다.
 
-### Estimate (Header)
-<img src="./public/img/estimates_db.png" width="100%" />
+---
+
+### 📄 Estimate (Header)
+
+<img src="./public/img/estimates_db_header.png" alt="Estimate Header Table" />
 
 - 견적 문서 단위 관리 테이블
 - 거래처, 견적일자, 견적번호 등 상위 문서 정보 관리
-- 1건의 견적에 다수의 품목(Line)이 연결되는 구조
-- 프론트엔드 견적서 화면의 **상위 문서 개념**을 담당
+- 하나의 견적(Header)에 다수의 품목(Line)이 연결되는 1:N 구조
+- 프론트엔드 견적서 화면의 **상위 문서 개념** 담당
 
-### Estimate Lines (Detail)
-<img src="./public/img/estimate_lines_db.png" width="100%" />
+---
+
+### 📄 Estimate Lines (Detail)
+
+<img src="./public/img/estimates_db_lines.png" alt="Estimate Line Table" />
 
 - 견적서 품목(Line) 단위 관리 테이블
 - 단가(PRICE) × 수량(QTY) 기반 금액(AMOUNT) 계산 구조
 - 프론트엔드 다중 품목 입력 UI와 1:1 매핑
-- 판매 및 회계 전표 확장을 고려한 데이터 모델 설계
+- 판매·회계 전표 확장을 고려한 데이터 모델 설계
+
+---
+
+### 🔍 DB 전체 구조 (원본)
+
+📎 [Estimate DB Structure 전체 이미지 보기](./public/img/estimates_db_full.png)
 
 ※ 본 프로젝트의 DB 테이블 및 컬럼명은  
-실제 ERP 시스템 관행에 맞춰 영문으로 설계되었습니다.
+실제 ERP 시스템 관행에 맞춰 **영문 표기 규칙**을 적용하였습니다.
 
 ---
 
@@ -170,7 +182,7 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 
 **이기창**  
 ERP / MES 기반 웹 서비스 개발  
-React (TypeScript) · Spring Boot 기반 풀스택 프로젝트
+React (TypeScript) · Spring Boot 기반 풀스택 프로젝트  
 
 현업 업무 흐름을 이해하고,  
 실제 현장에서 사용 가능한 시스템을 만드는 것을 지향합니다.
