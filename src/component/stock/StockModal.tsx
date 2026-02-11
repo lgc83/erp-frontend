@@ -89,7 +89,7 @@ export default function StockModal({
           </Col>
 
           <Col md={6}>
-            <Form.Label>품목코드</Form.Label>
+            <Form.Label>품목 코드</Form.Label>
             <Form.Control value={form.itemCode ?? ""} readOnly />
           </Col>
 
@@ -99,7 +99,7 @@ export default function StockModal({
           </Col>
 
           <Col md={6}>
-            <Form.Label>재고수량</Form.Label>
+            <Form.Label>재고 수량</Form.Label>
             <Form.Control
               type="number"
               value={Number(form.stockQty ?? 0)}
@@ -127,7 +127,7 @@ export default function StockModal({
           </Col>
 
           <Col md={12}>
-            <Form.Label>재고금액</Form.Label>
+            <Form.Label>재고 금액</Form.Label>
             <Form.Control value={totalAmount.toLocaleString()} readOnly />
           </Col>
         </Row>

@@ -49,7 +49,7 @@ export default function InventoryModal({ show, onClose, onSave, item, setItem }:
               {/* 품목코드 */}
               <InputGroup>
                 <W30>
-                  <MidLabel>품목코드</MidLabel>
+                  <MidLabel>품목 코드</MidLabel>
                 </W30>
                 <W70>
                   <Form.Control

@@ -24,6 +24,17 @@ const Login = () => {
         password,
       });
 
+      const myId =
+  res.data?.id ??
+  res.data?.memberId ??
+  res.data?.userId ??
+  res.data?.member?.id ??
+  res.data?.user?.id;
+
+if (myId) {
+  localStorage.setItem("memberId", String(myId));
+}
+
       // ✅ 여기서 백엔드가 토큰을 내려준다고 가정: res.data.token
       const token = res.data?.token;
 
@@ -106,12 +117,12 @@ const Login = () => {
 
                         <div className="mb-2">
                           <a href="#" className="btn btn-google btn-user btn-block">
-                            <i className="fab fa- fa-fw"></i> Login with Company Account
+                            <i className="fab fa-google fa-fw"></i> Login with Google
                           </a>
                         </div>
-                        <a href="#" className="btn btn-google btn-user btn-block">
-                                                              Login with Microsoft
-                          </a>
+                        <a href="#" className="btn btn-facebook btn-user btn-block">
+                          <i className="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                        </a>
                       </form>
 
                       <hr />

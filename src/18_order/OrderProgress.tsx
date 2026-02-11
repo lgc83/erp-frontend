@@ -37,8 +37,13 @@ api.interceptors.response.use(
   }
 );
 
-/** ✅ 여기만 너 백엔드에 맞게 바꿔 */
-const API_BASE = "/api/orders/progress";
+/** ✅ 여기만 너 백엔드에 맞게 바꿔
+ *  현재 백엔드에는 "/api/orders"만 있어서
+ *  "/api/orders/progress" 호출 시 404가 발생함.
+ *  진행단계 정보도 "/api/orders" 응답 안에 있으므로
+ *  동일 엔드포인트를 조회하도록 수정.
+ */
+const API_BASE = "/api/orders";
 
 type OrderProgressRow = {
   id: number; // 내부 id

@@ -37,8 +37,11 @@ api.interceptors.response.use(
   }
 );
 
-/** ✅ 여기만 너 백엔드에 맞게 바꿔 */
-const API_BASE = "/api/notice";
+/** ✅ 백엔드 공지사항 목록 엔드포인트에 맞춤
+ *  component/Notice.tsx에서 사용하는 "/api/notices"와 통일
+ *  (이전 "/api/notice" 때문에 404 발생)
+ */
+const API_BASE = "/api/notices";
 
 type NoticeRow = {
   id: number;

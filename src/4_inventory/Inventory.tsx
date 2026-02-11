@@ -23,7 +23,7 @@ const Inventory = () => {
   const [show, setShow] = useState(false);
 
   const columns: ColumnDef[] = [
-    { key: "itemCode", label: "품목코드" },
+    { key: "itemCode", label: "품목 코드" },
     { key: "itemName", label: "품목명" },
     { key: "itemGroup", label: "품목그룹" },
     { key: "spec", label: "규격" },
