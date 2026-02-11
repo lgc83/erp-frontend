@@ -45,6 +45,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 //sass  연결
 import './assets/scss/style.scss';//리액트 에서는 sass컴파일 없이 사용
+import EApprovalMyDocs from './16_mydocs/EApprovalMyDocs';
+import NoticeList from './17_notice/noticeList';
+import OrderProgress from './18_order/OrderProgress';
 
 
 
@@ -111,6 +114,11 @@ if  배열에 값이 있다면 그 값이 바뀔때 마다 실행된다
     <Route path="/about" element={<About/>}/>
     <Route path="/contact" element={<Contact/>}/>
     <Route path="/member" element={<Member/>}/>
+
+    <Route path="/mydocs" element={<EApprovalMyDocs/>}/>
+    <Route path="/notice" element={<NoticeList/>}/>
+    <Route path="/order" element={<OrderProgress/>}/>
+
    <Route path="/" element={<Navigate to="/login" replace />} />
     <Route path="/forgot" element={<Forgot/>}/>
     <Route path="/auth/instagram" element={<InstagramRedirect />} />
