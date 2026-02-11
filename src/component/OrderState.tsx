@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 
 /** ✅ 추가: 타입 */
-type DraftRow = {
+type OrderRow = {
   id: number;
-  draftDate: string;
-  title: string;
-  writer: string;
-  approver: string;
-  status: string;
+  orderNo: string;
+  orderName: string;
+  step: string;
 };
 
 /** ✅ 추가: axios */
@@ -39,12 +37,12 @@ api.interceptors.response.use(
   }
 );
 
-/** ✅ 추가: API 경로 */
-const API_BASE = "/api/drafts";
+/** ✅ 추가: 백엔드 경로만 맞추면 됨 */
+const API_BASE = "/api/orders";
 
-const Pay = () => {
+const OrderState = () => {
   /** ✅ 추가: state */
-  const [rows, setRows] = useState<DraftRow[]>([]);
+  const [rows, setRows] = useState<OrderRow[]>([]);
   const [loading, setLoading] = useState(false);
 
   /** ✅ 추가: 목록 조회 */
@@ -60,18 +58,16 @@ const Pay = () => {
         (Array.isArray(data?.items) ? data.items : null) ??
         [];
 
-      const normalized: DraftRow[] = list.map((r: any) => ({
-        id: Number(r.id ?? 0),
-        draftDate: String(r.draftDate ?? r.date ?? ""),
-        title: String(r.title ?? ""),
-        writer: String(r.writer ?? r.userName ?? "guest"),
-        approver: String(r.approver ?? "대표이사"),
-        status: String(r.status ?? "진행중"),
+      const normalized: OrderRow[] = list.map((r: any) => ({
+        id: Number(r.id ?? r.orderId ?? 0),
+        orderNo: String(r.orderNo ?? r.no ?? ""),
+        orderName: String(r.orderName ?? r.name ?? ""),
+        step: String(r.step ?? r.progress ?? ""),
       }));
 
       setRows(normalized);
     } catch (e) {
-      console.error("전자결재 목록 조회 실패", e);
+      console.error("오더 목록 조회 실패", e);
       setRows([]);
     } finally {
       setLoading(false);
@@ -83,54 +79,47 @@ const Pay = () => {
     fetchList();
   }, []);
 
-  /** ✅ 추가: 보기 */
+  /** ✅ 추가: 상세보기 */
   const onView = (id: number) => {
-    window.location.href = `/drafts/${id}`;
-  };
-
-  /** ✅ 추가: 복사 */
-  const onCopy = (id: number) => {
-    alert(`기안서 복사: ${id}`);
+    window.location.href = `/orders/${id}`;
   };
 
   return (
     <>
-      <div className="pay mt-120">
-        <div className="d-flex justify-content-between align-items-center">
-          <h4 className="fs-16-600-black">전자결재</h4>
-          <div className=""></div>
-        </div>
-        <h5 className="my-2 fs-14-400-gray ">내 기안문서</h5>
+      <div className="order-wrap">
+        <h5 className="my-2 fs-14-400-gray">오더관리진행단계</h5>
         <div className="table-wrap">
-          {/* ✅ variant 때문에 빨간줄 나는 경우가 많아서 className으로 처리 */}
-          <Table className="draft table-bordered" responsive>
-            <thead className="">
-              <tr className="text-center">
-                <th>기안일자</th>
-                <th>제목</th>
-                <th>기안자</th>
-                <th>결재자</th>
-                <th>진행상태</th>
-                <th>결재</th>
-                <th>기안서복사</th>
+          <Table responsive className="order">
+            <colgroup>
+              <col style={{ width: "10%" }} />
+              <col style={{ width: "15%" }} />
+              <col style={{ width: "70%" }} />
+              <col style={{ width: "5%" }} />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>오더관리번호</th>
+                <th>오더관리명</th>
+                <th>진행단계</th>
+                <th>상세</th>
               </tr>
             </thead>
-            <tbody className="tbody-wrap">
+            <tbody>
+              {/* ✅ 추가: 비어있을 때 */}
               {rows.length === 0 && (
-                <tr className="text-center">
-                  <td colSpan={7}>
-                    {loading ? "불러오는 중..." : "기안문서가 없습니다"}
+                <tr>
+                  <td colSpan={4} className="text-center">
+                    {loading ? "불러오는 중..." : "데이터가 없습니다"}
                   </td>
                 </tr>
               )}
 
+              {/* ✅ 추가: 서버 데이터 */}
               {rows.map((r) => (
-                <tr key={r.id} className="text-center">
-                  <td>{r.draftDate}</td>
-                  <td>{r.title}</td>
-                  <td>{r.writer}</td>
-                  <td>{r.approver}</td>
-                  <td>{r.status}</td>
+                <tr key={r.id}>
+                  <td>{r.orderNo}</td>
+                  <td>{r.orderName}</td>
+                  <td>{r.step}</td>
                   <td>
                     <a
                       href="#!"
@@ -142,20 +131,10 @@ const Pay = () => {
                       보기
                     </a>
                   </td>
-                  <td>
-                    <a
-                      href="#!"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onCopy(r.id);
-                      }}
-                    >
-                      복사
-                    </a>
-                  </td>
                 </tr>
               ))}
             </tbody>
+            <tfoot></tfoot>
           </Table>
         </div>
       </div>
@@ -163,4 +142,4 @@ const Pay = () => {
   );
 };
 
-export default Pay;
+export default OrderState;

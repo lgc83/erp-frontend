@@ -57,35 +57,7 @@ interface HelloResponse{
 }
 
 function App() {
-/*const [hello, setHello] = useState<string>('');
-//[현재 상태 값(state)값, 상태를 바꾸는 함수] = useState('')초기상태값을 빈문자열로 설정
-//즉 처음 렌더링 될때 hello는 빈문자열 '' 입니다
 
-useEffect(() => {
-  const fetchHello = async () => {
-    try{
-      const response = await axios.get<{data:string}>('http://localhost:8888/api/hello');
-      setHello(response.data.data);
-    }catch(error){
-      console.error(error);
-    }
-  };
-  fetchHello();
-}, [])//컴포넌트 최조 렌더링시 1회만 실행
-
-/*useEffect(() => {//useEffect로 API요청 보내기
-axios.get('http://localhost:8383/api/hello')//스프링에서 만들 주소
-.then(response => setHello(response.data))
-//자바스크립트는 equal 비동기 백앤드가 보낸 응답(response)을 받으면
-//response.data(실제데이터 내용)을 hello상태에 저장됩니다
-.catch(error => console.log(error))
-//요청 중 에러가 나면 콘솔에 로그를 출력합니다..
-}, []);
-/*
-이 함수는 컴포넌트가 처음 화면에 렌더링 된후에 한번만 실행됩니다
-[](빈배열)두번째 인자로 주었기 때문에 '한번만 실행' 됩니다
-if  배열에 값이 있다면 그 값이 바뀔때 마다 실행된다
-*/
 
   return (
 <>
@@ -117,7 +89,7 @@ if  배열에 값이 있다면 그 값이 바뀔때 마다 실행된다
 
     <Route path="/mydocs" element={<EApprovalMyDocs/>}/>
     <Route path="/notice" element={<NoticeList/>}/>
-    <Route path="/order" element={<OrderProgress/>}/>
+<Route path="/order" element={<OrderProgress/>}/>
 
    <Route path="/" element={<Navigate to="/login" replace />} />
     <Route path="/forgot" element={<Forgot/>}/>
