@@ -9,6 +9,7 @@ import { JustifyContent } from "../stylesjs/Util.styles";
 import { TableTitle } from "../stylesjs/Text.styles";
 import { BtnRight, MainSubmitBtn, WhiteBtn } from "../stylesjs/Button.styles";
 import Lnb from "../include/Lnb";
+import NoticeModal from "../component/notice/NoticeModal";
 
 /** ✅ axios (SalesPurchaseTrade랑 동일 패턴) */
 const api = axios.create({
@@ -37,15 +38,13 @@ api.interceptors.response.use(
   }
 );
 
-/** ✅ 백엔드 공지사항 목록 엔드포인트에 맞춤
- *  component/Notice.tsx에서 사용하는 "/api/notices"와 통일
- *  (이전 "/api/notice" 때문에 404 발생)
- */
-const API_BASE = "/api/notices";
+/** ✅ 여기만 너 백엔드에 맞게 바꿔 */
+const API_BASE = "/api/notice";
 
 type NoticeRow = {
   id: number;
   title: string;
+  content?:string;
   writer: string;
   createdAt: string; // 날짜
   isPinned?: boolean; // 상단고정(있으면)
@@ -55,6 +54,14 @@ type NoticeRow = {
 export default function NoticeList() {
   const [rows, setRows] = useState<NoticeRow[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+  const[isEditMode, setIsEditMode] = useState(false);
+  const[selected, setSelected] = useState<NoticeRow | null>(null);
+
+  const [form, setForm] = useState({
+    title:"", content:"", isPinned:false,
+  })
 
   const fetchList = async () => {
     setLoading(true);
@@ -96,14 +103,47 @@ export default function NoticeList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const openView = (id: number) => {
-    // ✅ 라우팅 있으면 navigate로 바꿔도 됨
-    window.location.href = `/notice/${id}`;
+  //상세조회
+  const openView = async(id: number) => {
+    try{
+      const res = await api.get(`${API_BASE}/${id}`);
+      setSelected(res.data);
+      setIsEditMode(false);
+      setShowModal(true);
+    }catch{
+      alert("상세조회 실패");
+    }
   };
 
-  const menuList = [
-    { key: "notice", label: "공지사항", path: "/notice" },
-  ];
+//신규
+const openCreate = () => {
+  setForm({title:"", content:"", isPinned:false});
+  setSelected(null);
+  setIsEditMode(true);
+  setShowModal(true);
+}
+
+//저장 신규 수정 공통
+const handleSave = async () => {
+  try{
+if(selected){await api.put(`${API_BASE}/${selected.id}`,form);}else{
+  await api.post(API_BASE, form);
+}setShowModal(false); fetchList();
+  }catch{
+alert("저장실패");
+  }
+}
+//삭제
+const handleDelete = async () => {
+  if(!selected) return;
+  if(!window.confirm("삭제하시겠습니까"))return;
+  try{
+await api.delete(`${API_BASE}/${selected.id}`);
+setShowModal(false); fetchList();
+  }catch{
+alert("삭제 실패");
+  }
+}
 
   return (
     <>
@@ -118,7 +158,9 @@ export default function NoticeList() {
           <Col>
             <Flex>
               <Left>
-                <Lnb menuList={menuList} title="공지사항" />
+                <Lnb 
+                menuList={[{ key: "notice", label: "공지사항", path: "/notice" }]}
+                title="공지사항" />
               </Left>
 
               <Right>
@@ -196,7 +238,7 @@ export default function NoticeList() {
 
                 <BtnRight style={{ marginTop: 12 }}>
                   <WhiteBtn onClick={fetchList}>새로고침</WhiteBtn>
-                  <MainSubmitBtn onClick={() => (window.location.href = "/notice/new")}>
+                  <MainSubmitBtn onClick={openCreate}>
                     신규
                   </MainSubmitBtn>
                 </BtnRight>
@@ -205,6 +247,25 @@ export default function NoticeList() {
           </Col>
         </Row>
       </Container>
+
+      <NoticeModal
+show={showModal}   
+onHide={() => setShowModal(false)}  
+data={selected} 
+isEditMode={isEditMode}
+form={form} 
+setForm={setForm}
+onSave={handleSave}
+onDelete={handleDelete} 
+onEditMode={() => {
+  setForm({
+    title:selected?.title ?? "",
+    content:selected?.content ?? "",
+    isPinned:selected?.isPinned ?? false,
+  });
+  setIsEditMode(true);
+}}    
+      />
     </>
   );
 }
