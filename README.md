@@ -8,6 +8,27 @@
 
 ---
 
+## 🔁 Order Management Business Process (ERP · MES 연계)
+
+본 프로젝트는 **고객 주문 → 재고 확인 → 생산 → 출하 → 매출 확정**까지의  
+전체 업무 흐름을 ERP와 MES 관점에서 통합적으로 설계하였습니다.
+
+ERP는 **주문·재고·출하·매출 관리**를 담당하며,  
+MES는 **생산 지시·작업 진행·품질 검사** 흐름을 담당합니다.
+
+### 📊 Order Management Process Diagram
+<a href="./public/img/order-process.png">
+  <img src="./public/img/order-process.png" style="max-width: 100%; height: auto;" />
+</a>
+
+### 📌 프로세스 요약
+- 고객 주문 접수 및 재고 확인 (ERP)
+- 재고 부족 시 구매/생산 오더 자동 연계 (ERP → MES)
+- 생산 완료 후 품질 검사 및 재고 반영 (MES → ERP)
+- 출하, 배송, 납품 완료(POD) 후 매출 확정 (ERP)
+
+---
+
 ## 🔐 Authentication (Login & User Registration)
 
 JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용자 등록 화면입니다.  
@@ -105,72 +126,54 @@ ERP/MES 환경에서 오더의 **진행 상태를 단계별로 관리**하기 �
   <img src="./public/img/오더관리.png" style="max-width: 100%; height: auto;" />
 </a>
 
-- 오더관리번호 자동 생성 구조
-- 월 단위 정기 발주 등 실무 오더 시나리오 반영
-- 발주완료 / 제작중 / 출고완료 등 진행단계 관리
-- ERP/MES 오더 흐름을 고려한 상태 기반 설계
+- 오더관리번호 자동 생성
+- 발주완료 / 제작중 / 출고완료 상태 관리
+- ERP–MES 연계 오더 흐름 반영
 
 ---
 
 ## 📢 Notice Management (공지사항 관리)
 
-시스템 운영 및 사용자 안내를 위한 **관리자 공지사항 관리 화면**입니다.  
-ERP 시스템 특성상 사용자에게 전달되어야 할 시스템 변경 사항을 효율적으로 관리할 수 있도록 구성했습니다.
-
-### 공지사항 등록 / 수정
 <a href="./public/img/공지사항.png">
   <img src="./public/img/공지사항.png" style="max-width: 100%; height: auto;" />
 </a>
 
-- 시스템 기능 개선 및 점검 안내 공지 관리
-- 제목 / 내용 기반 공지사항 등록·수정
-- 상단 고정 여부 설정을 통한 중요 공지 강조
-- 관리자 권한 기반 접근 화면 설계
+- 관리자 공지사항 등록 및 수정
+- 중요 공지 상단 고정 처리
+- 권한 기반 접근 제어
 
 ---
 
 ## 🗄 Database Snapshot (Estimate Structure)
-
-견적서 입력 화면은  
-실제 ERP 시스템의 **Header–Line(1:N) 구조**를 기준으로 설계되었으며,  
-프론트엔드 입력 UI와 DB 저장 구조 간의 **명확한 매핑**을 고려하여 구현하였습니다.
 
 ### 📄 Estimate (Header)
 <a href="./public/img/estimates_db.png">
   <img src="./public/img/estimates_db.png" style="max-width: 100%; height: auto;" />
 </a>
 
-- 견적 문서 단위 관리 테이블
-- 거래처, 견적일자, 견적번호 등 상위 문서 정보 관리
-- 하나의 견적(Header)에 다수의 품목(Line)이 연결되는 1:N 구조
-
 ### 📄 Estimate Lines (Detail)
 <a href="./public/img/estimate_lines_db.png">
   <img src="./public/img/estimate_lines_db.png" style="max-width: 100%; height: auto;" />
 </a>
 
-- 견적서 품목(Line) 단위 관리 테이블
-- 단가 × 수량 기반 금액 계산 구조
-- 프론트엔드 다중 품목 입력 UI와 1:1 매핑
+- Header–Line(1:N) 구조 기반 견적 데이터 설계
+- 프론트엔드 다중 품목 입력 UI와 DB 구조 매핑
 
 ---
 
 ## 🚀 Key Features
-
-- 로그인 / 회원가입 UI 구현
-- ERP 기준정보 / 거래 / 회계 / 오더 관리 화면 구성
-- CRUD 기반 관리 화면 설계
-- JWT 인증 상태 기반 접근 제어
-- 사용자 권한(Role)에 따른 화면 분기
-- 입력 오류를 최소화하기 위한 UX 중심 설계
+- ERP/MES 업무 흐름 기반 화면 설계
+- JWT 인증 및 권한 제어
+- 상태 기반 오더 관리
+- 실무 문서 구조 중심 UI/UX
 
 ---
 
 ## 👨‍💻 Developer
 
 **이기창**  
-ERP / MES 기반 웹 서비스 개발  
-React (TypeScript) · Spring Boot 기반 풀스택 프로젝트  
+ERP · MES 기반 웹 서비스 개발  
+React(TypeScript) · Spring Boot  
 
-현업 ERP 업무 흐름과 데이터 구조를 이해하고,  
-프론트엔드 화면을 업무 단위·문서 단위로 설계하는 개발자를 지향합니다.
+업무 흐름을 이해하고  
+현업에서 바로 사용할 수 있는 시스템을 설계하는 개발자를 지향합니다.
