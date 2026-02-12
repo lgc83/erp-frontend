@@ -15,10 +15,7 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 
 ### Login
 <a href="./public/img/로그인.png">
-  <img 
-    src="./public/img/로그인.png"
-    style="max-width: 100%; height: auto;"
-  />
+  <img src="./public/img/로그인.png" style="max-width: 100%; height: auto;" />
 </a>
 
 - JWT 기반 인증 흐름을 고려한 로그인 UI
@@ -27,10 +24,7 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 
 ### User Registration (회원가입)
 <a href="./public/img/회원가입.png">
-  <img 
-    src="./public/img/회원가입.png"
-    style="max-width: 100%; height: auto;"
-  />
+  <img src="./public/img/회원가입.png" style="max-width: 100%; height: auto;" />
 </a>
 
 - ERP 사용자 등록을 위한 회원가입 화면
@@ -61,10 +55,7 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 
 ### 📦 Inventory Registration (재고 등록)
 <a href="./public/img/재고등록.png">
-  <img 
-    src="./public/img/재고등록.png"
-    style="max-width: 100%; height: auto;"
-  />
+  <img src="./public/img/재고등록.png" style="max-width: 100%; height: auto;" />
 </a>
 
 - 품목 코드 및 품목명 기반 재고 관리
@@ -77,102 +68,30 @@ JWT 기반 인증 흐름을 고려하여 설계한 시스템 진입 및 사용�
 
 ### 🧾 Estimate Registration (견적서 입력)
 <a href="./public/img/견적서입력.png">
-  <img 
-    src="./public/img/견적서입력.png"
-    style="max-width: 100%; height: auto;"
-  />
+  <img src="./public/img/견적서입력.png" style="max-width: 100%; height: auto;" />
 </a>
 
 - 거래처 기준 견적 데이터 등록
 - 다중 품목 입력 및 합계 금액 자동 계산
 - 실무 ERP 견적서 작성 흐름 반영
 
-### 🧾 Estimate Management (견적서 등록)
+### 🧾 Estimate Management (견적서 관리)
 <a href="./public/img/견적서등록2.png">
-  <img 
-    src="./public/img/견적서등록2.png"
-    style="max-width: 100%; height: auto;"
-  />
+  <img src="./public/img/견적서등록2.png" style="max-width: 100%; height: auto;" />
 </a>
 
 - 기존 견적 데이터 수정 및 관리
 - 품목 단위 금액 변경 시 합계 자동 반영
 - ERP 견적 관리 화면 구조를 기준으로 UI 설계
 
----
-
 ### 🧾 Sales Registration (판매 등록)
 <a href="./public/img/판매등록.png">
-  <img 
-    src="./public/img/판매등록.png"
-    style="max-width: 100%; height: auto;"
-  />
+  <img src="./public/img/판매등록.png" style="max-width: 100%; height: auto;" />
 </a>
 
 - 거래처 선택 후 판매 품목 다중 라인 입력
 - 수량 × 단가 기반 금액 자동 계산
 - 판매 합계 금액 실시간 반영
-
----
-
-### 📑 Accounting Voucher (회계 전표 관리)
-
-#### 일반전표 등록
-<a href="./public/img/일반전표등록.png">
-  <img 
-    src="./public/img/일반전표등록.png"
-    style="max-width: 100%; height: auto;"
-  />
-</a>
-
-- 차변 / 대변 구조 기반 전표 입력
-- 전표 상태(작성중 / 확정) 관리
-- ERP 회계 전표 흐름을 고려한 화면 구성
-
-#### 매출전표 등록
-<a href="./public/img/매출전표등록.png">
-  <img 
-    src="./public/img/매출전표등록.png"
-    style="max-width: 100%; height: auto;"
-  />
-</a>
-
-- 매출 발생 시 자동 분개 구조 설계
-- 공급가액 / 부가세 / 합계 자동 계산
-- 차변·대변 분개 미리보기 제공
-- 회계 흐름을 고려한 매출 인식 구조 반영
-
----
-
-## 🗄 Database Snapshot (Estimate Structure)
-
-견적서 입력 화면은  
-실제 ERP 시스템의 **Header–Line(1:N) 구조**를 기준으로 설계되었으며,  
-프론트엔드 입력 UI와 DB 저장 구조 간의 **명확한 매핑**을 고려하여 구현하였습니다.
-
-### 📄 Estimate (Header)
-<a href="./public/img/estimates_db.png">
-  <img 
-    src="./public/img/estimates_db.png"
-    style="max-width: 100%; height: auto;"
-  />
-</a>
-
-- 견적 문서 단위 관리 테이블
-- 거래처, 견적일자, 견적번호 등 상위 문서 정보 관리
-- 하나의 견적(Header)에 다수의 품목(Line)이 연결되는 1:N 구조
-
-### 📄 Estimate Lines (Detail)
-<a href="./public/img/estimate_lines_db.png">
-  <img 
-    src="./public/img/estimate_lines_db.png"
-    style="max-width: 100%; height: auto;"
-  />
-</a>
-
-- 견적서 품목(Line) 단위 관리 테이블
-- 단가 × 수량 기반 금액 계산 구조
-- 프론트엔드 다중 품목 입력 UI와 1:1 매핑
 
 ---
 
@@ -183,10 +102,7 @@ ERP/MES 환경에서 오더의 **진행 상태를 단계별로 관리**하기 �
 
 ### 오더 진행단계 등록
 <a href="./public/img/오더관리.png">
-  <img 
-    src="./public/img/오더관리.png"
-    style="max-width: 100%; height: auto;"
-  />
+  <img src="./public/img/오더관리.png" style="max-width: 100%; height: auto;" />
 </a>
 
 - 오더관리번호 자동 생성 구조
@@ -203,16 +119,39 @@ ERP 시스템 특성상 사용자에게 전달되어야 할 시스템 변경 사
 
 ### 공지사항 등록 / 수정
 <a href="./public/img/공지사항.png">
-  <img 
-    src="./public/img/공지사항.png"
-    style="max-width: 100%; height: auto;"
-  />
+  <img src="./public/img/공지사항.png" style="max-width: 100%; height: auto;" />
 </a>
 
 - 시스템 기능 개선 및 점검 안내 공지 관리
 - 제목 / 내용 기반 공지사항 등록·수정
 - 상단 고정 여부 설정을 통한 중요 공지 강조
 - 관리자 권한 기반 접근 화면 설계
+
+---
+
+## 🗄 Database Snapshot (Estimate Structure)
+
+견적서 입력 화면은  
+실제 ERP 시스템의 **Header–Line(1:N) 구조**를 기준으로 설계되었으며,  
+프론트엔드 입력 UI와 DB 저장 구조 간의 **명확한 매핑**을 고려하여 구현하였습니다.
+
+### 📄 Estimate (Header)
+<a href="./public/img/estimates_db.png">
+  <img src="./public/img/estimates_db.png" style="max-width: 100%; height: auto;" />
+</a>
+
+- 견적 문서 단위 관리 테이블
+- 거래처, 견적일자, 견적번호 등 상위 문서 정보 관리
+- 하나의 견적(Header)에 다수의 품목(Line)이 연결되는 1:N 구조
+
+### 📄 Estimate Lines (Detail)
+<a href="./public/img/estimate_lines_db.png">
+  <img src="./public/img/estimate_lines_db.png" style="max-width: 100%; height: auto;" />
+</a>
+
+- 견적서 품목(Line) 단위 관리 테이블
+- 단가 × 수량 기반 금액 계산 구조
+- 프론트엔드 다중 품목 입력 UI와 1:1 매핑
 
 ---
 
